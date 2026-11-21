@@ -28,7 +28,7 @@ const themeScript = `
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="zh-CN" data-theme="dark" suppressHydrationWarning>
+    <html lang="zh-Hant" data-theme="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <meta name="color-scheme" content="dark light" />
@@ -40,8 +40,8 @@ export default function RootLayout({ children }) {
           </a>
           <nav>
             <a href="#works">作品</a>
-            <a href="#about">关于</a>
-            <a href="#contact">联系</a>
+            <a href="#about">關於</a>
+            <a href="#contact">聯繫</a>
           </nav>
           <ThemeToggle />
         </header>

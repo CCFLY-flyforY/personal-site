@@ -35,7 +35,7 @@ export default function Home() {
         </div>
         <div className="about-text">
           <div className="band-head tight">
-            <h2>关于</h2>
+            <h2>關於</h2>
             <p className="eyebrow">About</p>
           </div>
           {site.about.map((p, i) => (
@@ -78,7 +78,7 @@ export default function Home() {
 
       <section id="contact" className="band contact">
         <div className="band-head tight">
-          <h2>联系</h2>
+          <h2>聯繫</h2>
           <p className="eyebrow">Get in touch</p>
         </div>
         <a className="mail" href={site.contact[0].href}>
