@@ -4,11 +4,12 @@ import { site } from '../content/site';
 
 export const metadata = {
   title: `${site.name} — ${site.role}`,
-  description: site.tagline,
+  description: site.heroLine,
   openGraph: {
     title: `${site.name} — ${site.role}`,
-    description: site.tagline,
+    description: site.heroLine,
     type: 'website',
+    images: [site.heroPhoto.src],
   },
 };
 
@@ -17,7 +18,7 @@ const themeScript = `
   try {
     var forced = new URLSearchParams(location.search).get('theme');
     var saved = localStorage.getItem('theme');
-    var theme = forced || saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    var theme = forced || saved || 'dark';
     document.documentElement.dataset.theme = theme;
   } catch (e) {
     document.documentElement.dataset.theme = 'dark';
@@ -33,16 +34,14 @@ export default function RootLayout({ children }) {
         <meta name="color-scheme" content="dark light" />
       </head>
       <body>
-        <header className="topbar">
-          <a className="brand" href="#top">
-            <span className="brand-dot" />
+        <header className="site-head">
+          <a className="mark" href="#top">
             {site.name}
           </a>
-          <nav className="nav">
+          <nav>
+            <a href="#works">作品</a>
             <a href="#about">关于</a>
-            <a href="#work">项目</a>
-            <a href="#photos">照片</a>
-            <a href="#writing">写作</a>
+            <a href="#notes">笔记</a>
             <a href="#contact">联系</a>
           </nav>
           <ThemeToggle />

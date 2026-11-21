@@ -1,125 +1,99 @@
 import { site } from '../content/site';
-
-function SectionHead({ index, title, note }) {
-  return (
-    <div className="sec-head">
-      <span className="sec-index">{index}</span>
-      <h2>{title}</h2>
-      {note ? <span className="sec-note">{note}</span> : null}
-    </div>
-  );
-}
+import Lightbox from '../components/Lightbox';
 
 export default function Home() {
   const year = new Date().getFullYear();
 
   return (
     <main id="top">
+      {/* 首屏：整幅照片 */}
       <section className="hero">
-        <p className="hero-kicker">
-          <span className="mono">{site.latin}</span>
-          <span className="sep">/</span>
-          {site.role}
-        </p>
-        <h1 className="hero-title">
-          {site.name}
-          <span className="hero-dot">.</span>
-        </h1>
-        <p className="hero-tagline">{site.tagline}</p>
-        <p className="hero-now">{site.now}</p>
-        <div className="hero-links">
-          {site.contact.slice(0, 2).map((c) => (
-            <a key={c.label} className="btn" href={c.href} target="_blank" rel="noreferrer">
-              {c.label} <span aria-hidden>↗</span>
-            </a>
-          ))}
+        <img className="hero-img" src={site.heroPhoto.src} alt="" />
+        <div className="hero-veil" />
+        <div className="hero-copy">
+          <p className="eyebrow">{site.role}</p>
+          <h1>{site.name}</h1>
+          <p className="hero-line">{site.heroLine}</p>
+          <p className="hero-meta">{site.heroPhoto.meta}</p>
         </div>
+        <a className="hero-down" href="#works" aria-label="往下看作品">
+          <span />
+        </a>
       </section>
 
-      <section id="about" className="section">
-        <SectionHead index="01" title="关于" note="在做的事 / 关心的事" />
-        <div className="about">
+      <section id="works" className="band">
+        <div className="band-head">
+          <h2>作品</h2>
+          <p className="eyebrow">Selected works · {site.works.length}</p>
+        </div>
+        <Lightbox photos={site.works} />
+      </section>
+
+      <section id="about" className="band about">
+        <div className="about-photo">
+          <img src={site.aboutPhoto.src} alt={site.aboutPhoto.alt} loading="lazy" />
+        </div>
+        <div className="about-text">
+          <div className="band-head tight">
+            <h2>关于</h2>
+            <p className="eyebrow">About</p>
+          </div>
           {site.about.map((p, i) => (
             <p key={i}>{p}</p>
           ))}
-        </div>
-      </section>
-
-      <section id="work" className="section">
-        <SectionHead index="02" title="项目" note={`${site.projects.length} 个`} />
-        <ul className="projects">
-          {site.projects.map((p) => (
-            <li className="project" key={p.title}>
-              <a href={p.href}>
-                <div className="project-top">
-                  <h3>{p.title}</h3>
-                  <span className="mono year">{p.year}</span>
-                </div>
-                <p>{p.desc}</p>
-                <div className="tags">
-                  {p.tags.map((t) => (
-                    <span key={t} className="tag">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section id="photos" className="section">
-        <SectionHead index="03" title="照片" note="静物 / 模型 / 光线" />
-        <div className="photos">
-          {site.photos.map((ph, i) => (
-            <figure className={`photo tone-${ph.tone}`} key={ph.title} style={{ '--i': i }}>
-              <div className="photo-canvas" aria-hidden>
-                <span className="photo-hint">替换成你的照片</span>
+          <dl className="stats">
+            {site.stats.map((s) => (
+              <div key={s.k}>
+                <dt>{s.k}</dt>
+                <dd>{s.v}</dd>
               </div>
-              <figcaption>
-                <strong>{ph.title}</strong>
-                <span className="mono">{ph.meta}</span>
-              </figcaption>
-            </figure>
-          ))}
+            ))}
+          </dl>
         </div>
       </section>
 
-      <section id="writing" className="section">
-        <SectionHead index="04" title="写作" note="踩过的坑与记下的结论" />
-        <ul className="posts">
-          {site.posts.map((post) => (
-            <li key={post.title}>
-              <a href={post.href}>
-                <span className="mono date">{post.date}</span>
-                <span className="post-body">
-                  <strong>{post.title}</strong>
-                  <span>{post.summary}</span>
+      <section id="notes" className="band">
+        <div className="band-head">
+          <h2>笔记</h2>
+          <p className="eyebrow">Notes</p>
+        </div>
+        <ul className="notes">
+          {site.notes.map((n) => (
+            <li key={n.title}>
+              <a href={n.href}>
+                <span className="note-date">{n.date}</span>
+                <span className="note-body">
+                  <strong>{n.title}</strong>
+                  <span>{n.summary}</span>
                 </span>
+                <span className="note-arrow" aria-hidden>→</span>
               </a>
             </li>
           ))}
         </ul>
       </section>
 
-      <section id="contact" className="section">
-        <SectionHead index="05" title="联系" note="随时找我聊天" />
-        <ul className="contact">
-          {site.contact.map((c) => (
+      <section id="contact" className="band contact">
+        <div className="band-head tight">
+          <h2>联系</h2>
+          <p className="eyebrow">Get in touch</p>
+        </div>
+        <a className="mail" href={site.contact[0].href}>
+          {site.contact[0].value}
+        </a>
+        <ul className="links">
+          {site.contact.slice(1).map((c) => (
             <li key={c.label}>
-              <span className="mono label">{c.label}</span>
-              <a href={c.href} target="_blank" rel="noreferrer">
-                {c.value} <span aria-hidden>↗</span>
-              </a>
+              <span className="eyebrow">{c.label}</span>
+              <a href={c.href} target="_blank" rel="noreferrer">{c.value}</a>
             </li>
           ))}
         </ul>
       </section>
 
-      <footer className="footer">
-        <span className="mono">© {year} {site.name}</span>
-        <span className="mono dim">Next.js 静态导出 · GitHub Pages</span>
+      <footer className="foot">
+        <span>© {year} {site.name}</span>
+        <span>Next.js · GitHub Pages</span>
       </footer>
     </main>
   );
