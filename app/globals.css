@@ -148,8 +148,8 @@ main {
 .hero-dot { color: var(--accent); }
 
 .hero-tagline {
-  max-width: 42ch;
-  text-wrap: balance;
+  max-width: 32em;
+  text-wrap: pretty;
   margin: 26px 0 0;
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   line-height: 1.6;
