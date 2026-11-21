@@ -45,7 +45,23 @@ npm run build    # 生成 out/
 - `public/photos/xinjiang/`：新疆的 7 张片子 + 两张衍生图 —— `hero-dunes.jpg`（首屏，从 P1010798 单独渲染的 2600px 版）和 `about-horses.jpg`（关于区竖构图，从 P1010406 裁的 4:5）；
 - `public/photos/`：微距两张（`macro-tall` / `macro-texture`）。
 
-来源是 `D:\新疆\P101*.dng`（Olympus E-M5），用 rawpy 按相机白平衡解码后转 JPEG。这些只是让版式立起来的示例，正式发布前换成你真正想展示的片子。
+来源是 `D:\新疆\P101*.dng`（Olympus E-M5），用 `tools/render_xj.py` 转 JPEG。
+
+### 关于颜色
+
+rawpy 的默认输出是"平"的（只有相机矩阵 + gamma，没有色调曲线、没有饱和，还带 auto-bright），所以直接转出来会比机内 JPEG / Lightroom 修过的版本淡很多。`tools/render_xj.py` 改成：
+
+```
+linear sRGB(16bit) → 分位归一化 → ACES 近似色调映射 → 对比 1.02 / 饱和 1.12
+```
+
+改口味就调 `DEFAULT` 里的 `exposure / contrast / saturation`，然后：
+
+```bash
+python tools/render_xj.py
+```
+
+需要和你在 Lightroom 里修的那版完全一致，就把那 7 张导出成 JPEG（长边 2000、quality 85+）丢进 `public/photos/xinjiang/`，文件名保持一致即可覆盖 —— 这是唯一能 1:1 还原你调色的办法，因为 DNG 本身只存原始/线性数据和预览，不存你的调色。
 
 ## 部署到 GitHub Pages
 
