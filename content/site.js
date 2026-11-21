@@ -31,7 +31,7 @@ export const site = {
   categories: [
     { id: 'all', label: '全部' },
     { id: 'landscape', label: '風景' },
-    { id: 'bird', label: '鳥類' },
+    { id: 'bird', label: '生態' },
     { id: 'city', label: '城市' },
     { id: 'still', label: '靜物' },
     { id: 'night', label: '夜景' },
@@ -41,6 +41,7 @@ export const site = {
   works: [
     { src: '/photos/thunder/mountain-grass.jpg', title: '山脊與草甸', meta: 'E-M5 · 午後', cat: 'landscape', focus: 'center 55%' },
     { src: '/photos/thunder/lake-snow.jpg', title: '湖與雪線', meta: 'E-M5 · 高原湖', cat: 'landscape', focus: 'center 45%' },
+    { src: '/photos/thunder/forest-clouds.jpg', title: '雲霧林線', meta: 'E-M5 · 高原', cat: 'landscape', focus: 'center 45%' },
     { src: '/photos/thunder/clouds-peaks.jpg', title: '雲上雪峰', meta: 'E-M5 · 雲層', cat: 'landscape', focus: 'center 40%' },
     { src: '/photos/thunder/sunset-slope.jpg', title: '日落坡', meta: 'E-M5 · 逆光', cat: 'landscape', focus: 'center 50%' },
     { src: '/photos/thunder/river-terrace.jpg', title: '河谷台地', meta: 'E-M5 · 河谷', cat: 'landscape', focus: 'center 55%' },
@@ -51,12 +52,14 @@ export const site = {
     { src: '/photos/thunder/cable-car-bw.jpg', title: '纜車（黑白）', meta: 'E-M5 · 黑白', cat: 'landscape', focus: 'center 45%' },
 
     { src: '/photos/thunder/egret-box.jpg', title: '木箱上的白鷺', meta: 'E-M5 · 岸邊', cat: 'bird', focus: 'center 45%' },
+    { src: '/photos/thunder/yellow-flower.jpg', title: '暗處的黃花', meta: 'E-M5 · 自然光', cat: 'bird', focus: 'center 50%' },
     { src: '/photos/thunder/egret-portrait.jpg', title: '白鷺', meta: 'E-M5 · 草叢', cat: 'bird', focus: 'center 40%' },
     { src: '/photos/thunder/pelican.jpg', title: '鵜鶘', meta: 'E-M5 · 濕地', cat: 'bird', focus: 'center 40%' },
     { src: '/photos/thunder/bird-snag.jpg', title: '枯木與鳥', meta: 'E-M5 · 濕地', cat: 'bird', focus: 'center 35%' },
     { src: '/photos/thunder/heron.jpg', title: '蒼鷺', meta: 'E-M5 · 白底', cat: 'bird', focus: 'center 45%' },
 
     { src: '/photos/thunder/canton-tower.jpg', title: '廣州塔', meta: 'E-M5 · 月夜', cat: 'city', focus: 'center 55%' },
+    { src: '/photos/thunder/ferry-next.jpg', title: '下一班渡輪', meta: 'E-M5 · 碼頭', cat: 'city', focus: 'center 45%' },
     { src: '/photos/thunder/star-ferry.jpg', title: '天星小輪', meta: 'E-M5 · 維港', cat: 'city', focus: 'center 55%' },
     { src: '/photos/thunder/pier-boat.jpg', title: '碼頭', meta: 'E-M5 · 維港', cat: 'city', focus: 'center 55%' },
     { src: '/photos/thunder/harbour-boat.jpg', title: '維港', meta: 'E-M5 · 午後', cat: 'city', focus: 'center 55%' },
@@ -98,3 +101,4 @@ export const site = {
     { label: 'Bilibili', value: 'FLYforY07', href: 'https://space.bilibili.com/455989258' },
   ],
 };
+
