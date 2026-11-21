@@ -1,5 +1,5 @@
 import { site } from '../content/site';
-import Gallery from '../components/Gallery';
+import WorksSection from '../components/WorksSection';
 
 export default function Home() {
   const year = new Date().getFullYear();
@@ -21,13 +21,7 @@ export default function Home() {
         </a>
       </section>
 
-      <section id="works" className="band">
-        <div className="band-head">
-          <h2>作品</h2>
-          <p className="eyebrow">Selected works · {site.works.length}</p>
-        </div>
-        <Gallery photos={site.works} categories={site.categories} />
-      </section>
+      <WorksSection />
 
       <section id="about" className="band about">
         <div className="about-photo">

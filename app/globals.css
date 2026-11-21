@@ -618,3 +618,60 @@ html[data-stone="off"] body {
   background-blend-mode: normal;
   background-attachment: fixed;
 }
+
+/* ---------------- 作品区：默认收起 ---------------- */
+.works-head {
+  align-items: baseline;
+}
+
+/* 让带按钮的标题行保持原来的竖线节奏 */
+.works-head .eyebrow { margin-left: auto; margin-right: 18px; }
+
+.works-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.works-toggle:hover {
+  border-color: var(--ink-dim);
+  color: var(--ink);
+}
+
+.works-chev {
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.works-chev.is-open { transform: rotate(-135deg) translateY(-2px); }
+
+/* 收起时的一行摘要：風景 11 · 生態 6 · 城市 5 · 靜物 1 · 夜景 1 */
+.works-peek {
+  margin: 14px 0 0;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+
+.works-body { animation: worksIn 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+
+@keyframes worksIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
