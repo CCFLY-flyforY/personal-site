@@ -5,10 +5,10 @@ export const site = {
   name: '你的名字',
   latin: 'YOUR NAME',
   role: '摄影 / PHOTOGRAPHER',
-  heroLine: '把光留在器物上。',
+  heroLine: '等光来，也走进光里。',
   heroPhoto: {
-    src: '/photos/hero-figures.jpg',
-    meta: 'OM-1 · ISO 200 · 1/10s',
+    src: '/photos/xinjiang/hero-dunes.jpg',
+    meta: 'E-M5 · 沙脊光影',
   },
 
   aboutPhoto: {
@@ -18,12 +18,12 @@ export const site = {
 
   stats: [
     { k: '器材', v: 'OM System OM-1 · Olympus E-M5' },
-    { k: '偏好', v: '静物 · 模型 · 微距 · 山野' },
+    { k: '偏好', v: '山野 · 模型 · 微距' },
     { k: '后期', v: 'RAW 直出 · 少量调整' },
   ],
 
   about: [
-    '拍东西的时间比说到底多。喜欢把器物放在一盏灯下，慢慢等它显出纹理 —— 塑料的反光、金属的划痕、织物的纤维，光线一旦对了，它们自己会说话。',
+    '给模型拍照的时候最舍得花时间：一盏灯、一块底布，等反光和划痕自己显出来。光线一旦对了，器物会自己说话。',
     '也走远路。高原的湖、牧场的马群、云层下的林线，那些光不在我能控制的地方，只能等它来。',
   ],
 
@@ -31,7 +31,6 @@ export const site = {
   categories: [
     { id: 'all', label: '全部' },
     { id: 'xinjiang', label: '新疆' },
-    { id: 'still', label: '静物' },
     { id: 'model', label: '模型' },
     { id: 'macro', label: '微距' },
   ],
@@ -86,20 +85,6 @@ export const site = {
       meta: 'E-M5 · 高原逆光',
       cat: 'xinjiang',
       focus: 'center 60%',
-    },
-    {
-      src: '/photos/figures-detail.jpg',
-      title: '双子',
-      meta: 'OM-1 · ISO 200 · 1/10s',
-      cat: 'still',
-      focus: 'center 30%',
-    },
-    {
-      src: '/photos/figures-bw.jpg',
-      title: '灯下（黑白）',
-      meta: 'OM-1 · 黑底布光',
-      cat: 'still',
-      focus: 'center 45%',
     },
     {
       src: '/photos/gunpla-full.jpg',
