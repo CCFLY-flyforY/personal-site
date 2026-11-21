@@ -52,6 +52,29 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="projects" className="band">
+        <div className="band-head">
+          <h2>項目</h2>
+          <p className="eyebrow">Projects · {site.projects.length}</p>
+        </div>
+        <div className="projects">
+          {site.projects.map((p, i) => (
+            <a className="proj" key={p.name} href={p.href} target="_blank" rel="noreferrer" style={{ '--i': i }}>
+              <span className="proj-name">{p.name}</span>
+              <span className="proj-desc">{p.desc}</span>
+              <span className="proj-foot">
+                <span className="proj-tags">
+                  {p.tags.map((t) => (
+                    <span key={t}>{t}</span>
+                  ))}
+                </span>
+                <span className="proj-arrow" aria-hidden>↗</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
       {/* 笔记：暂时隐藏。想恢复就把下面这段取消注释，并把 layout.jsx 的「笔记」导航加回来。
           数据仍然在 content/site.js 的 notes 里。
       <section id="notes" className="band">

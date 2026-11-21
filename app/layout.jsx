@@ -41,6 +41,7 @@ export default function RootLayout({ children }) {
           <nav>
             <a href="#works">作品</a>
             <a href="#about">關於</a>
+            <a href="#projects">項目</a>
             <a href="#contact">聯繫</a>
           </nav>
           <ThemeToggle />

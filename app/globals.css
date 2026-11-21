@@ -311,6 +311,60 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
 }
 
+/* ---------------- 項目（GitHub 小项目） ---------------- */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(12px, 1.8vw, 20px);
+}
+
+.proj {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(18px, 2.2vw, 26px);
+  border: 1px solid var(--hair);
+  background: var(--bg-2);
+  transition: border-color 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease;
+}
+
+.proj:hover { border-color: var(--ink-dim); transform: translateY(-3px); }
+
+.proj-name {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  word-break: break-all;
+}
+
+.proj-desc { font-size: 0.94rem; line-height: 1.75; color: var(--ink-soft); }
+
+.proj-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 6px;
+  border-top: 1px solid var(--hair-soft);
+}
+
+.proj-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 8px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.proj-arrow { padding-top: 8px; color: var(--ink-dim); transition: transform 0.25s ease, color 0.25s ease; }
+.proj:hover .proj-arrow { transform: translate(3px, -3px); color: var(--accent); }
+
 /* ---------------- 关于 ---------------- */
 .about {
   display: grid;
@@ -519,6 +573,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 960px) {
   .site-head nav { display: none; }
   .masonry { columns: 2; }
+  .projects { grid-template-columns: 1fr; }
   .about { grid-template-columns: 1fr; }
   .about-photo { max-width: 420px; }
   .notes a { grid-template-columns: 92px 1fr; }

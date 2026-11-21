@@ -65,6 +65,22 @@ export const site = {
     { src: '/photos/thunder/star-trails.jpg', title: '星軌', meta: 'E-M5 · 長曝光', cat: 'night', focus: 'center 50%' },
   ],
 
+  // GitHub 上的小項目：name 是倉庫名，desc 自己寫，tags 顯示在卡片底部
+  projects: [
+    {
+      name: 'spektralab-intel',
+      desc: '為 Intel Mac 打的 SpektraLab 編譯補丁 —— 自己 build，不發二進位。',
+      tags: ['Shell', 'GPL-3.0', '2026'],
+      href: 'https://github.com/CCFLY-flyforY/spektralab-intel',
+    },
+    {
+      name: 'open-wallpaper-engine-mac-patched',
+      desc: 'Open Wallpaper Engine 的 macOS 分支，讓 Intel Mac 也能跑：場景渲染、音頻律動條、屬性面板。',
+      tags: ['Swift', 'GPL-3.0', '2026'],
+      href: 'https://github.com/CCFLY-flyforY/open-wallpaper-engine-mac-patched',
+    },
+  ],
+
   // 筆記區目前在頁面上隱藏，資料保留，想恢復見 app/page.jsx 的註解
   notes: [
     {

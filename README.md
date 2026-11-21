@@ -21,7 +21,8 @@ npm run build    # 生成 out/
 | `stats` | 关于下面的三行小表（器材 / 偏好 / 后期） |
 | `works` | 作品：`src` / `title` / `meta` / `cat`（分类 id）/ `focus`（裁切重心） |
 | `categories` | 分类：`id` / `label`，顺序就是页面上筛选按钮的顺序，`id` 必须和作品的 `cat` 对上 |
-| `notes` | 笔记：`title` / `date` / `summary` / `href` |
+| `notes` | 笔记（当前在页面上隐藏，数据保留）：`title` / `date` / `summary` / `href` |
+| `projects` | GitHub 小項目：`name`（仓库名）/ `desc` / `tags` / `href` |
 | `contact` | 第一条是大号邮箱，其余是下面的小链接 |
 
 ### 换成你自己的照片
