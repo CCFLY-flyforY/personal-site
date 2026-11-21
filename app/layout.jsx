@@ -31,7 +31,14 @@ const themeScript = `
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="zh-Hant" data-theme="dark" suppressHydrationWarning>
+    <html
+      lang="zh-Hant"
+      data-theme="dark"
+      suppressHydrationWarning
+      style={{
+        '--tex-dust': `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/textures/stone-dust.png')`,
+      }}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <meta name="color-scheme" content="dark light" />

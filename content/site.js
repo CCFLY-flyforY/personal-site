@@ -1,5 +1,10 @@
 // 全站内容都在这个文件里改。文案統一用繁體。
-// 照片放在 public/photos/，src 寫 "/photos/xxx.jpg"；子路徑部署時要帶前綴（見 README）。
+// 照片放在 public/photos/，src 寫 "/photos/xxx.jpg"。
+// 項目型 Pages（https://<user>.github.io/<repo>/）部署時資源路徑要帶 /<repo> 前綴，
+// 由 NEXT_PUBLIC_BASE_PATH 注入；自訂網域（根路徑）時該變數留空即可。
+
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const withBase = (p) => (p && p.startsWith('/') ? BASE + p : p);
 
 export const site = {
   name: 'SKYVAULT',
@@ -102,3 +107,7 @@ export const site = {
   ],
 };
 
+// 给静态资源统一加前缀（必须在 site 定义之后）
+site.heroPhoto.src = withBase(site.heroPhoto.src);
+site.aboutPhoto.src = withBase(site.aboutPhoto.src);
+site.works = site.works.map((w) => ({ ...w, src: withBase(w.src) }));

@@ -19,16 +19,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+
       - run: npm ci
-      # 仓库型站点 https://<user>.github.io/<repo>/ 必须带子路径；
-      # 如果仓库名是 <user>.github.io（用户型站点），把下面两处 env 整段删掉。
+
+      # 自动判断子路径：
+      #   仓库叫 personal-site            -> 站点在 https://<user>.github.io/personal-site/  -> basePath = /personal-site
+      #   仓库叫 <user>.github.io         -> 站点在 https://<user>.github.io/              -> basePath = 空
+      # 之后绑自定义域名（如 skyvault.eu.org）时，站点变成根路径提供，basePath 也要空：
+      #   把下面的步骤删掉，改成 NEXT_PUBLIC_BASE_PATH: ''
+      - id: basepath
+        run: |
+          NAME="${{ github.event.repository.name }}"
+          if [[ "$NAME" == *.github.io ]]; then
+            echo "path=" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=/$NAME" >> "$GITHUB_OUTPUT"
+          fi
+
       - run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.basepath.outputs.path }}
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

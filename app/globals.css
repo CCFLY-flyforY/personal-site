@@ -14,6 +14,8 @@
   --accent: #d9b45f;
   --accent-soft: rgba(96, 126, 210, 0.06);
   --scrim: rgba(2, 4, 12, 0.82);
+  /* 石粉贴图由 layout.jsx 按 basePath 注入，这里给本地开发兜底 */
+  --tex-dust: url('/textures/stone-dust.png');
 
   --sans: "Inter", "Segoe UI", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
   --serif: Georgia, "Times New Roman", "Songti SC", serif;
@@ -50,7 +52,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
   /* 石面质感做进背景层：照片是子元素，会自然盖住它，不会被颗粒糊住 */
   background-image:
-    url('/textures/stone-dust.png'),
+    var(--tex-dust),
     radial-gradient(900px 500px at 82% -8%, var(--accent-soft), transparent 62%),
     radial-gradient(700px 420px at 4% 108%, rgba(125, 133, 150, 0.08), transparent 60%),
     radial-gradient(1100px 700px at 12% 34%, rgba(78, 108, 190, 0.07), transparent 68%),
