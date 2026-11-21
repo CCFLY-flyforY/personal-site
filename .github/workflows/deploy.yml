@@ -27,17 +27,23 @@ jobs:
 
       - run: npm ci
 
-      # 自动判断子路径：
-      #   仓库叫 personal-site       -> 站点在 https://<user>.github.io/personal-site/ -> basePath = /personal-site
-      #   仓库叫 <user>.github.io    -> 站点在 https://<user>.github.io/               -> basePath = 空
-      # 之后绑自定义域名（如 skyvault.eu.org）时站点变成根路径，把这一步删掉、改成 NEXT_PUBLIC_BASE_PATH: ''
+      # basePath 三种情况：
+      #   1) 仓库变量 SITE_DOMAIN 非空  -> 已绑自定义域名，站点在根路径 -> basePath 留空
+      #   2) 仓库叫 <user>.github.io    -> 用户型站点，根路径          -> basePath 留空
+      #   3) 其他（如 personal-site）   -> 项目型站点 /<repo>/         -> basePath = /<repo>
+      # 想切自定义域名不用改这个文件：跑 tools/switch_domain.py --apply 会自动设 SITE_DOMAIN
       - id: basepath
         run: |
           NAME="${{ github.event.repository.name }}"
-          if [[ "$NAME" == *.github.io ]]; then
+          if [[ -n "${{ vars.SITE_DOMAIN }}" ]]; then
             echo "path=" >> "$GITHUB_OUTPUT"
+            echo "自定义域名模式（${{ vars.SITE_DOMAIN }}）：basePath 留空"
+          elif [[ "$NAME" == *.github.io ]]; then
+            echo "path=" >> "$GITHUB_OUTPUT"
+            echo "用户型站点：basePath 留空"
           else
             echo "path=/$NAME" >> "$GITHUB_OUTPUT"
+            echo "项目型站点：basePath=/$NAME"
           fi
 
       - run: npm run build

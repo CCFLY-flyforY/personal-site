@@ -117,3 +117,13 @@ out/              npm run build 产物，可直接部署
 - `python tools\check_site.py <站点地址>` —— 部署后自检（首页/内容/照片/贴图/CSS 是否都 200）
 - GitHub Actions 每次部署完也会自动跑同样的自检，失败会让 Actions 标红
 - 详细步骤见 `docs/deploy-howto.md`，免费域名见 `docs/free-domain-eu-org.md`
+
+### 切到自定义域名（skyvault.eu.org 批下来之后）
+
+```
+python tools\switch_domain.py                # 先预览要改什么、要加哪些 DNS 记录
+python tools\switch_domain.py --apply        # 真的切：设 SITE_DOMAIN 变量 → 写 CNAME → 推送 → 设 Pages 域名
+python tools\switch_domain.py --apply --wait 20   # 切完顺便等域名生效
+```
+
+切换后 workflow 看到仓库变量 `SITE_DOMAIN` 非空，会自动把 `basePath` 置空（站点从根路径提供）。
