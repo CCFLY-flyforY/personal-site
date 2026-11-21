@@ -40,12 +40,13 @@ npm run build    # 生成 out/
 
 > 子路径部署（仓库型站点）时 `src` 要带前缀：`` `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/photos/x.jpg` ``，否则图片 404。
 
-### 现在仓库里的示例图
+### 现在仓库里的照片
 
-- `public/photos/xinjiang/`：新疆的 7 张片子 + 两张衍生图 —— `hero-dunes.jpg`（首屏，从 P1010798 单独渲染的 2600px 版）和 `about-horses.jpg`（关于区竖构图，从 P1010406 裁的 4:5）；
-- `public/photos/`：微距两张（`macro-tall` / `macro-texture`）。
+- `public/photos/thunder/`：21 张（风景 10 / 鸟类 5 / 城市 4 / 静物 1 / 夜景 1），来源是 `D:\迅雷下载` 里那批照片；
+- 首屏 `mountain-grass.jpg`（2400px），关于区 `about-portrait.jpg`（从 lake-snow 裁 4:5）；
+- 处理脚本 `tools/process_thunder.py`：自动裁掉相机白边（`CROP` 里是按图实测的内缩像素）、长边 1800、JPEG q84。
 
-来源是 `D:\新疆\P101*.dng`（Olympus E-M5），用 `tools/render_xj.py` 转 JPEG。
+`tools/render_xj.py` 是早前新疆 DNG 那批的 RAW 渲染脚本，保留备用。
 
 ### 关于颜色
 
@@ -107,3 +108,4 @@ out/              npm run build 产物，可直接部署
 - 首屏大图始终是照片本身，明暗主题只影响正文区域，所以标题永远压在半透明黑幕上。
 - 断点 960px / 560px；动效遵循 `prefers-reduced-motion`。
 - 没有引入 UI 框架和 CSS 库，改配色只动两组 CSS 变量。
+
