@@ -61,7 +61,8 @@ body {
   background-size: 512px 512px, 512px 512px, auto, auto, auto, auto, auto;
   background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
   background-blend-mode: normal, normal, normal, normal, normal, normal, normal;
-  background-attachment: fixed;
+  /* 石粉/金斑跟着内容滚（scroll），环境渐变钉在视口（fixed） */
+  background-attachment: scroll, scroll, fixed, fixed, fixed, fixed, fixed;
 }
 
 img { display: block; max-width: 100%; }
@@ -616,4 +617,5 @@ html[data-stone="off"] body {
   background-size: auto;
   background-repeat: no-repeat;
   background-blend-mode: normal;
+  background-attachment: fixed;
 }
