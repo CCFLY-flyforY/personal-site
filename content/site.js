@@ -7,8 +7,8 @@ export const site = {
   role: '攝影 / PHOTOGRAPHY',
   heroLine: '大多時候，都在等光。',
   heroPhoto: {
-    src: '/photos/thunder/mountain-grass.jpg',
-    meta: 'E-M5 · 山脊與草甸',
+    src: '/photos/thunder/forest-clouds-hero.jpg',
+    meta: 'E-M5 · 雲霧林線',
   },
 
   aboutPhoto: {
