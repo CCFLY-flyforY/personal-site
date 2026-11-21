@@ -2,11 +2,13 @@ import './globals.css';
 import ThemeToggle from '../components/ThemeToggle';
 import { site } from '../content/site';
 
-// 站点对外地址：抓取分享卡片（og:image）时需要绝对地址，否则会落成 localhost。
-// 绑自定义域名后把 NEXT_PUBLIC_SITE_URL 换成 https://skyvault.eu.org/
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  `https://ccfly-flyfory.github.io${process.env.NEXT_PUBLIC_BASE_PATH || ''}/`;
+// 分享卡片（og:image）需要绝对地址。
+// 注意：site.heroPhoto.src 里已经带了 NEXT_PUBLIC_BASE_PATH 前缀，
+// 所以这里只拼「域名」，不能再交给 metadataBase 解析一次，否则会 /repo/repo/ 双前缀。
+const ORIGIN = process.env.NEXT_PUBLIC_SITE_URL || 'https://ccfly-flyfory.github.io';
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const SITE_URL = `${ORIGIN}${BASE_PATH}/`;
+const OG_IMAGE = `${ORIGIN}${site.heroPhoto.src}`;
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -18,13 +20,13 @@ export const metadata = {
     type: 'website',
     url: SITE_URL,
     siteName: site.name,
-    images: [site.heroPhoto.src],
+    images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${site.name} — ${site.role}`,
     description: site.heroLine,
-    images: [site.heroPhoto.src],
+    images: [OG_IMAGE],
   },
 };
 
