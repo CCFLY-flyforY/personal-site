@@ -52,6 +52,8 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 笔记：暂时隐藏。想恢复就把下面这段取消注释，并把 layout.jsx 的「笔记」导航加回来。
+          数据仍然在 content/site.js 的 notes 里。
       <section id="notes" className="band">
         <div className="band-head">
           <h2>笔记</h2>
@@ -72,6 +74,7 @@ export default function Home() {
           ))}
         </ul>
       </section>
+      */}
 
       <section id="contact" className="band contact">
         <div className="band-head tight">
