@@ -20,6 +20,9 @@ const themeScript = `
     var saved = localStorage.getItem('theme');
     var theme = forced || saved || 'dark';
     document.documentElement.dataset.theme = theme;
+    if (new URLSearchParams(location.search).get('stone') === 'off') {
+      document.documentElement.dataset.stone = 'off';
+    }
   } catch (e) {
     document.documentElement.dataset.theme = 'dark';
   }
