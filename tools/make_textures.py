@@ -75,11 +75,11 @@ def make_dust():
     coarse = fractal_noise(SIZE, beta=2.6, seed=43)
     field = 0.55 * fine + 0.45 * coarse
     field = np.clip((field - 0.5) * 1.6 + 0.5, 0, 1)
-    alpha = (field ** 1.6 * 62).astype(np.uint8)      # 上限约 30% 不透明度
+    alpha = (field ** 1.7 * 42).astype(np.uint8)      # 上限约 30% 不透明度
     canvas = np.zeros((SIZE, SIZE, 4), dtype=np.uint8)
-    canvas[..., 0] = 142
-    canvas[..., 1] = 160
-    canvas[..., 2] = 198
+    canvas[..., 0] = 104
+    canvas[..., 1] = 122
+    canvas[..., 2] = 164
     canvas[..., 3] = alpha
     img = Image.fromarray(canvas, "RGBA")
     path = os.path.join(OUT, "stone-dust.png")
