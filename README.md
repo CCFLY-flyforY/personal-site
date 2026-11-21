@@ -127,3 +127,15 @@ python tools\switch_domain.py --apply --wait 20   # 切完顺便等域名生效
 ```
 
 切换后 workflow 看到仓库变量 `SITE_DOMAIN` 非空，会自动把 `basePath` 置空（站点从根路径提供）。
+
+### git 推不上去时的备用通道
+
+国内网络有时会掐掉 github.com 的 443（报 Recv failure: Connection was reset），
+但 pi.github.com 通常还通。这时用：
+
+```
+python tools\api_push.py            # 预览要推哪些文件
+python tools\api_push.py --apply    # 走 REST API 提交（blob→tree→commit→移动分支）
+```
+
+它按**内容哈希**比对远端，内容一致的文件会自动跳过，可重复执行。
