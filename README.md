@@ -19,7 +19,8 @@ npm run build    # 生成 out/
 | `aboutPhoto` | 「关于」左侧那张竖图 |
 | `about` | 关于正文，字符串数组 |
 | `stats` | 关于下面的三行小表（器材 / 偏好 / 后期） |
-| `works` | 作品：`src` / `title` / `meta` / `focus`（object-position）/ `wide`（true 时整行 16:9 大图） |
+| `works` | 作品：`src` / `title` / `meta` / `cat`（分类 id）/ `focus`（裁切重心） |
+| `categories` | 分类：`id` / `label`，顺序就是页面上筛选按钮的顺序，`id` 必须和作品的 `cat` 对上 |
 | `notes` | 笔记：`title` / `date` / `summary` / `href` |
 | `contact` | 第一条是大号邮箱，其余是下面的小链接 |
 
@@ -27,8 +28,15 @@ npm run build    # 生成 out/
 
 1. 图片放进 `public/photos/`（建议长边 1600–2000 px、JPEG quality 85，单张 300 KB 以内）；
 2. 在 `content/site.js` 里把 `src` 改成 `/photos/你的文件名.jpg`；
-3. `wide: true` 的照片会占满整行（16:9 裁切），其余按 4:5 两栏排列 —— 一张竖图配一张横图会很整齐；
-4. `focus` 控制裁切重心，比如 `'center 30%'` 让人脸留在上方。
+3. 竖图横图都可以，**瀑布流按自然比例排**，不用手动指定尺寸；
+4. `focus` 控制裁切重心，比如 `'center 30%'` 让人脸留在上方（只在灯箱/裁切场景生效）；
+5. 想加分类：`categories` 里加一项，再把作品的 `cat` 设成那个 `id`，按钮和计数会自动出现。
+
+### 分类与瀑布流
+
+- 筛选是纯客户端状态：点分类只切换列表，不刷新页面；数量角标自动统计。
+- 瀑布流用 CSS `columns`（桌面 3 栏 / ≤960px 2 栏 / ≤620px 1 栏），靠 `break-inside: avoid` 让每张图不被切开。
+- 灯箱在筛选后的列表里工作：`←/→` 只翻当前分类，右上角显示「序号/总数」。
 
 > 子路径部署（仓库型站点）时 `src` 要带前缀：`` `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/photos/x.jpg` ``，否则图片 404。
 

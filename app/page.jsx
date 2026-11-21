@@ -1,5 +1,5 @@
 import { site } from '../content/site';
-import Lightbox from '../components/Lightbox';
+import Gallery from '../components/Gallery';
 
 export default function Home() {
   const year = new Date().getFullYear();
@@ -26,7 +26,7 @@ export default function Home() {
           <h2>作品</h2>
           <p className="eyebrow">Selected works · {site.works.length}</p>
         </div>
-        <Lightbox photos={site.works} />
+        <Gallery photos={site.works} categories={site.categories} />
       </section>
 
       <section id="about" className="band about">
