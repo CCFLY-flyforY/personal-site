@@ -42,10 +42,10 @@ npm run build    # 生成 out/
 
 ### 现在仓库里的示例图
 
-- `public/photos/xinjiang/`：7 张新疆片子 + `hero-dunes.jpg`（首屏，从 P1010798 单独渲染的 2600px 版），来自 `D:\新疆\P101*.dng`（Olympus E-M5），用 rawpy 按相机白平衡解码后转 JPEG；
-- `public/photos/`：RX-78-2 模型三张、微距两张。
+- `public/photos/xinjiang/`：新疆的 7 张片子 + 两张衍生图 —— `hero-dunes.jpg`（首屏，从 P1010798 单独渲染的 2600px 版）和 `about-horses.jpg`（关于区竖构图，从 P1010406 裁的 4:5）；
+- `public/photos/`：微距两张（`macro-tall` / `macro-texture`）。
 
-这些只是让版式立起来的示例，正式发布前换成你真正想展示的片子。
+来源是 `D:\新疆\P101*.dng`（Olympus E-M5），用 rawpy 按相机白平衡解码后转 JPEG。这些只是让版式立起来的示例，正式发布前换成你真正想展示的片子。
 
 ## 部署到 GitHub Pages
 

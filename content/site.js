@@ -12,26 +12,25 @@ export const site = {
   },
 
   aboutPhoto: {
-    src: '/photos/gunpla-portrait.jpg',
-    alt: '工作台上的 RX-78-2',
+    src: '/photos/xinjiang/about-horses.jpg',
+    alt: '牧场上的马群',
   },
 
   stats: [
-    { k: '器材', v: 'OM System OM-1 · Olympus E-M5' },
-    { k: '偏好', v: '山野 · 模型 · 微距' },
+    { k: '器材', v: 'Olympus E-M5 · OM System OM-1' },
+    { k: '偏好', v: '山野 · 光影 · 微距' },
     { k: '后期', v: 'RAW 直出 · 少量调整' },
   ],
 
   about: [
-    '给模型拍照的时候最舍得花时间：一盏灯、一块底布，等反光和划痕自己显出来。光线一旦对了，器物会自己说话。',
-    '也走远路。高原的湖、牧场的马群、云层下的林线，那些光不在我能控制的地方，只能等它来。',
+    '拍得最多的还是等光。一条山谷的云、一片沙脊的阴影，太阳挪一寸，画面就换一次；能做的只是早点到位，然后在原地待着。',
+    '也拍近处。微距里的纤维和纹理，得把光贴上去才看得见 —— 和等大风景其实是一回事，只是尺度不同。',
   ],
 
   // 分类：id 与作品里的 cat 对应，顺序就是页面上的顺序
   categories: [
     { id: 'all', label: '全部' },
     { id: 'xinjiang', label: '新疆' },
-    { id: 'model', label: '模型' },
     { id: 'macro', label: '微距' },
   ],
 
@@ -87,23 +86,9 @@ export const site = {
       focus: 'center 60%',
     },
     {
-      src: '/photos/gunpla-full.jpg',
-      title: 'RX-78-2',
-      meta: 'OM-1 · ISO 200 · 1/6s',
-      cat: 'model',
-      focus: 'center center',
-    },
-    {
-      src: '/photos/gunpla-detail.jpg',
-      title: '装甲接缝',
-      meta: '连拍 7 帧 · 多帧合成',
-      cat: 'model',
-      focus: 'center center',
-    },
-    {
       src: '/photos/macro-tall.jpg',
       title: '金色纤维',
-      meta: '微距 · ISO 200',
+      meta: '微距 · 侧光',
       cat: 'macro',
       focus: 'center center',
     },
