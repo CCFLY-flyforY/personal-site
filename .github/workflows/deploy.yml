@@ -28,10 +28,9 @@ jobs:
       - run: npm ci
 
       # 自动判断子路径：
-      #   仓库叫 personal-site            -> 站点在 https://<user>.github.io/personal-site/  -> basePath = /personal-site
-      #   仓库叫 <user>.github.io         -> 站点在 https://<user>.github.io/              -> basePath = 空
-      # 之后绑自定义域名（如 skyvault.eu.org）时，站点变成根路径提供，basePath 也要空：
-      #   把下面的步骤删掉，改成 NEXT_PUBLIC_BASE_PATH: ''
+      #   仓库叫 personal-site       -> 站点在 https://<user>.github.io/personal-site/ -> basePath = /personal-site
+      #   仓库叫 <user>.github.io    -> 站点在 https://<user>.github.io/               -> basePath = 空
+      # 之后绑自定义域名（如 skyvault.eu.org）时站点变成根路径，把这一步删掉、改成 NEXT_PUBLIC_BASE_PATH: ''
       - id: basepath
         run: |
           NAME="${{ github.event.repository.name }}"
@@ -58,3 +57,68 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      # 部署完自动验一遍：首页 200 + 内容对 + 首屏图/贴图/CSS 都能取到。
+      # 任何一项挂了，这次 Actions 就标红，不用等你肉眼发现白屏。
+      - name: 线上自检
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PY'
+          import os, re, sys, time, urllib.parse, urllib.request
+
+          base = os.environ["PAGE_URL"]
+          if not base.endswith("/"):
+              base += "/"
+          print("检查", base)
+
+          def get(url, tries=6):
+              last = None
+              for i in range(tries):
+                  try:
+                      req = urllib.request.Request(url, headers={"User-Agent": "pages-selfcheck"})
+                      with urllib.request.urlopen(req, timeout=25) as r:
+                          return r.status, r.read()
+                  except Exception as e:            # noqa: BLE001
+                      last = e
+                      time.sleep(5)
+              print("取不到:", url, last)
+              return 0, b""
+
+          fails = []
+          code, body = get(base)
+          html = body.decode("utf-8", "replace")
+          print("首页 HTTP", code)
+          if code != 200:
+              fails.append("首页")
+          if "SKYVAULT" not in html:
+              fails.append("页面内容")
+              print("页面里没找到 SKYVAULT")
+          else:
+              print("内容正常")
+
+          def check(label, rel):
+              url = urllib.parse.urljoin(base, rel.lstrip("/"))
+              st, _ = get(url, tries=3)
+              print(f"{label} HTTP {st}  {url}")
+              if st != 200:
+                  fails.append(label)
+
+          photo = re.search(r'src="([^"]*photos/[^"]*)"', html)
+          css = re.search(r'href="([^"]*\.css)"', html)
+          if photo:
+              check("首屏图", photo.group(1))
+          else:
+              fails.append("首屏图")
+              print("页面里找不到照片路径")
+          check("贴图", "textures/stone-dust.png")
+          if css:
+              check("CSS", css.group(1))
+          else:
+              fails.append("CSS")
+
+          if fails:
+              print("::error::线上自检失败：" + "、".join(fails) + "（多半是 basePath 与部署路径不匹配）")
+              sys.exit(1)
+          print("全绿，站点可对外")
+          PY

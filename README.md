@@ -110,3 +110,10 @@ out/              npm run build 产物，可直接部署
 - 断点 960px / 560px；动效遵循 `prefers-reduced-motion`。
 - 没有引入 UI 框架和 CSS 库，改配色只动两组 CSS 变量。
 
+
+### 发布与自检
+
+- `powershell -NoProfile -ExecutionPolicy Bypass -File tools\publish.ps1` —— 一键：检查仓库 → 设 remote → 推送 → 打开 Pages 设置
+- `python tools\check_site.py <站点地址>` —— 部署后自检（首页/内容/照片/贴图/CSS 是否都 200）
+- GitHub Actions 每次部署完也会自动跑同样的自检，失败会让 Actions 标红
+- 详细步骤见 `docs/deploy-howto.md`，免费域名见 `docs/free-domain-eu-org.md`
