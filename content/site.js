@@ -78,5 +78,7 @@ export const site = {
   // 第一條會顯示成頁尾的大號郵箱，其餘顯示成下面的小連結
   contact: [
     { label: 'Email', value: '2961981161@qq.com', href: 'mailto:2961981161@qq.com' },
+    { label: 'GitHub', value: 'github.com/FLYforY07', href: 'https://github.com/FLYforY07' },
+    { label: 'Bilibili', value: 'FLYforY07', href: 'https://search.bilibili.com/upuser?keyword=FLYforY07' },
   ],
 };
