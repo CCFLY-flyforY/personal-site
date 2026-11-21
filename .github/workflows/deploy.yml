@@ -97,8 +97,19 @@ jobs:
           else:
               print("内容正常")
 
+          def resolve(rel):
+              # 页面里的路径已经带 basePath（如 /personal-site/photos/x.jpg），
+              # 要按"域名根"解析，不能再用 urljoin 二次拼接
+              if rel.startswith("http"):
+                  return rel
+              parts = urllib.parse.urlsplit(base)
+              origin = f"{parts.scheme}://{parts.netloc}"
+              if rel.startswith("/"):
+                  return origin + rel
+              return urllib.parse.urljoin(base, rel)
+
           def check(label, rel):
-              url = urllib.parse.urljoin(base, rel.lstrip("/"))
+              url = resolve(rel)
               st, _ = get(url, tries=3)
               print(f"{label} HTTP {st}  {url}")
               if st != 200:

@@ -25,6 +25,19 @@ def fetch(url, timeout=20):
         return r.status, r.read()
 
 
+def resolve(base, rel):
+    """页面里的资源路径可能已经带 basePath（/personal-site/photos/x.jpg），
+    这种情况要按域名根解析；只有相对路径才用 urljoin 拼接。"""
+    import urllib.parse
+    if rel.startswith("http"):
+        return rel
+    parts = urllib.parse.urlsplit(base)
+    origin = f"{parts.scheme}://{parts.netloc}"
+    if rel.startswith("/"):
+        return origin + rel
+    return urllib.parse.urljoin(base, rel)
+
+
 def head_ok(url, timeout=20):
     req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "skyvault-site-check"})
     try:
@@ -67,7 +80,7 @@ def main(argv):
     textures = re.findall(r'url\(\\?[\'"]?([^\'")]*textures[^\'")]*)', html)
     print(f"  页面里照片 {len(photos)} 处，贴图 {len(textures)} 处")
     if photos:
-        abs_photos = [u if u.startswith("http") else urllib.parse.urljoin(base, u.lstrip("/")) for u in photos]
+        abs_photos = [resolve(base, u) for u in photos]
         # 子路径部署时，资源应带 /<repo>/ 前缀；这里直接请求前 3 张验证
         bad = []
         for u in abs_photos[:3]:
@@ -83,7 +96,7 @@ def main(argv):
 
     # 4) 贴图与 CSS
     for label, u in [
-        ("贴图", urllib.parse.urljoin(base, "textures/stone-dust.png")),
+        ("贴图", resolve(base, "textures/stone-dust.png")),
     ]:
         st = head_ok(u)
         print(f"{'✓' if st == 200 else '✗'} {label} {u} -> {st}")
@@ -92,7 +105,7 @@ def main(argv):
 
     css = re.findall(r'href="([^"]+\.css)"', html)
     if css:
-        u = css[0] if css[0].startswith("http") else urllib.parse.urljoin(base, css[0].lstrip("/"))
+        u = resolve(base, css[0])
         st = head_ok(u)
         print(f"{'✓' if st == 200 else '✗'} CSS {u} -> {st}")
         if st != 200:
@@ -112,3 +125,4 @@ if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     import urllib.parse  # noqa: E402  (main 里用到)
     raise SystemExit(main(sys.argv))
+
