@@ -75,11 +75,11 @@ def make_dust():
     coarse = fractal_noise(SIZE, beta=2.6, seed=43)
     field = 0.55 * fine + 0.45 * coarse
     field = np.clip((field - 0.5) * 1.6 + 0.5, 0, 1)
-    alpha = (field ** 1.7 * 42).astype(np.uint8)      # 上限约 30% 不透明度
+    alpha = (field ** 1.8 * 34).astype(np.uint8)      # 上限约 30% 不透明度
     canvas = np.zeros((SIZE, SIZE, 4), dtype=np.uint8)
-    canvas[..., 0] = 104
-    canvas[..., 1] = 122
-    canvas[..., 2] = 164
+    canvas[..., 0] = 78
+    canvas[..., 1] = 94
+    canvas[..., 2] = 132
     canvas[..., 3] = alpha
     img = Image.fromarray(canvas, "RGBA")
     path = os.path.join(OUT, "stone-dust.png")
@@ -89,9 +89,8 @@ def make_dust():
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    make_grain()
+    # 目前站点只用石粉层；颗粒/金斑两份保留生成函数，需要时取消注释即可
     make_dust()
-    make_specks()
 
 
 if __name__ == "__main__":

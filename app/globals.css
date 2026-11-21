@@ -4,16 +4,16 @@
    --------------------------------------------------------------- */
 :root {
   /* 深青金石：夜蓝底 + 石中金斑做点缀 */
-  --bg: #05081a;
-  --bg-2: #0c142e;
+  --bg: #02040d;
+  --bg-2: #070b1c;
   --ink: #e6ebf6;
   --ink-soft: #a3aec6;
   --ink-dim: #6b7591;
-  --hair: rgba(205, 218, 245, 0.13);
+  --hair: rgba(205, 218, 245, 0.11);
   --hair-soft: rgba(225, 234, 255, 0.07);
   --accent: #d9b45f;
-  --accent-soft: rgba(96, 126, 210, 0.09);
-  --scrim: rgba(3, 6, 18, 0.78);
+  --accent-soft: rgba(96, 126, 210, 0.06);
+  --scrim: rgba(2, 4, 12, 0.82);
 
   --sans: "Inter", "Segoe UI", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
   --serif: Georgia, "Times New Roman", "Songti SC", serif;
@@ -48,21 +48,18 @@ body {
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* 石面质感做进背景层：颗粒用 overlay 和下面的渐变混合，
-     金斑正常叠在最上；照片是子元素，会自然盖住它们，不会被颗粒糊住 */
+  /* 石面质感做进背景层：照片是子元素，会自然盖住它，不会被颗粒糊住 */
   background-image:
-    url('/textures/gold-specks.png'),
     url('/textures/stone-dust.png'),
     radial-gradient(900px 500px at 82% -8%, var(--accent-soft), transparent 62%),
     radial-gradient(700px 420px at 4% 108%, rgba(125, 133, 150, 0.08), transparent 60%),
     radial-gradient(1100px 700px at 12% 34%, rgba(78, 108, 190, 0.07), transparent 68%),
     radial-gradient(900px 640px at 88% 72%, rgba(46, 68, 148, 0.08), transparent 66%),
     radial-gradient(1300px 900px at 50% 118%, rgba(8, 14, 42, 0.72), transparent 70%);
-  background-size: 512px 512px, 512px 512px, auto, auto, auto, auto, auto;
-  background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-  background-blend-mode: normal, normal, normal, normal, normal, normal, normal;
-  /* 石粉/金斑跟着内容滚（scroll），环境渐变钉在视口（fixed） */
-  background-attachment: scroll, scroll, fixed, fixed, fixed, fixed, fixed;
+  background-size: 512px 512px, auto, auto, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-blend-mode: normal, normal, normal, normal, normal, normal;
+  background-attachment: fixed;
 }
 
 img { display: block; max-width: 100%; }
